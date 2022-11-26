@@ -169,41 +169,39 @@ const addEmployee = () => {
 
 const addRole = () => {
     inquirer.prompt([
-      {
-        name: `title`,
-        type: `input`,
-        message: `Please enter job title`
-      },
-      {
-        name: `salary`,
-        type: `input`,
-        message: `Please enter job salary`
-      },
-      {
-        name: `department_id`,
-        type: `input`,
-        message: `Please enter department id`
-      },
+        {
+            name: `title`,
+            type: `input`,
+            message: `Please enter job title`
+        },
+        {
+            name: `salary`,
+            type: `input`,
+            message: `Please enter job salary`
+        },
+        {
+            name: `department_id`,
+            type: `input`,
+            message: `Please enter department id`
+        },
     ])
-    .then((answers) => {
-      console.log(answers);
-        const userInput = "INSERT INTO roles (title, salary, department_id) VALUES (?,?,?)"
-        const params =  [answers.title, answers.salary, answers.department_id]
-        
-        db.query(userInput, params, function (err, results) {
-         if (err) throw err;
-          console.log(results);
-          runEmployeeDB();
+        .then((answers) => {
+            console.log(answers);
+            const userInput = "INSERT INTO roles (title, salary, department_id) VALUES (?,?,?)"
+            const params = [answers.title, answers.salary, answers.department_id]
+
+            db.query(userInput, params, function (err, results) {
+                if (err) throw err;
+                console.log(results);
+                runEmployeeDB();
+            });
         });
-    });
 };
 
-
-
-    // EXIT FUNCTION
-    function exit() {
-        db.end();
-    }
+// EXIT FUNCTION
+function exit() {
+    db.end();
+}
 
 
 
