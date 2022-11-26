@@ -30,8 +30,6 @@ const runEmployeeDB = () => {
                 "View Employees",
                 "View Departments",
                 "View Roles",
-                "View Employees by Department",
-                "View Employees by Role",
                 "Add Department",
                 "Add Role",
                 "Add Employee",
@@ -56,13 +54,6 @@ const runEmployeeDB = () => {
                 viewEmployees();
                 break;
                 _
-            case "View Employees by Department":
-                viewEmployeesByDepartment();
-                break;
-
-            case "View Employees by Role":
-                viewEmployeesByRole();
-                break;
 
             // THESE REQUIRE ACTION
             case "Add Department":
@@ -90,8 +81,6 @@ const runEmployeeDB = () => {
 
 // VIEW FUNCTIONS
 function viewDepartments() {
-    // ** go get all info for the departments
-    // mysql.query function
     db.query('SELECT * from departments', function(err, res) {
         if (err) throw err;
         // console.log(res);
@@ -101,8 +90,6 @@ function viewDepartments() {
 };
 
 function viewRoles() {
-    // ** go get all info for the departments
-    // mysql.query function
     db.query('SELECT * from roles', function(err, res) {
         if (err) throw err;
         // console.log(res);
@@ -112,8 +99,6 @@ function viewRoles() {
 };
 
 function viewEmployees() {
-    // ** go get all info for the departments
-    // mysql.query function
     db.query('SELECT * from employees', function(err, res) {
         if (err) throw err;
         // console.log(res);
@@ -122,27 +107,54 @@ function viewEmployees() {
     })
 };
 
-function viewEmployeesByDepartment() {
-    // ** go get all info for the departments
-    // mysql.query function
-    db.query('SELECT * from departments', function(err, res) {
+// ACTION FUNCTIONS
+
+const addDepartment = () => {
+inquirer.prompt([
+    {
+        name: `name`,
+        type: `input`,
+        message: `Please enter department name`
+    }
+])
+
+.then((answers) => {
+    const sql = `INSERT INTO departments (dep_name) VALUES (?)`;
+    const userInput = [answers.name];
+    db.query(sql, userInput, function (err, res) {
         if (err) throw err;
-        // console.log(res);
-        console.table(res);
-        runEmployeeDB()
-    })
+        console.log(res);
+        runEmployeeDB;
+    });
+});
 };
 
-function viewEmployeesByRole() {
-    // ** go get all info for the departments
-    // mysql.query function
-    db.query('SELECT * from departments', function(err, res) {
-        if (err) throw err;
-        // console.log(res);
-        console.table(res);
-        runEmployeeDB()
-    })
-};
+const addEmployee = () => {
+    inquirer.prompt([
+        {
+    
+        }
+    ])
+    
+    }
+
+const addRole = () => {
+    inquirer.prompt([
+        {
+    
+        }
+    ])
+    
+    }
+
+const updateEmployeeRole = () => {
+    inquirer.prompt([
+        {
+    
+        }
+    ])
+    
+    }
 
 
 // EXIT FUNCTION
